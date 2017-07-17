@@ -7,7 +7,9 @@
 import {
   REQUEST_TOPICS,
   REQUEST_TOPICS_SUCCEEDED,
-  REQUEST_TOPICS_FAILED
+  REQUEST_TOPICS_FAILED,
+  SELECT_TOPIC,
+  TOGGLE_DRAWER,
 } from './constants';
 
 //action creators
@@ -28,5 +30,18 @@ export function requestTopicsFailed(message) {
   return {
     type: REQUEST_TOPICS_FAILED,
     message
+  }
+}
+
+export function selectTopic(topic) {
+  return {
+    type: SELECT_TOPIC,
+    topic
+  }
+}
+
+export function toggleDrawer() {
+  return {
+    type: TOGGLE_DRAWER,
   }
 }

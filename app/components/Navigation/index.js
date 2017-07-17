@@ -5,18 +5,25 @@
 */
 
 import React from 'react';
-
+import AppBar from '../AppBar';
 
 import styles from './styles.css';
 
-function Navigation({topics}) {
+function Navigation({topics, selectTopic}) {
+  const topicNodes = topics.map(t => (
+    <div key={t.name} onClick={() => selectTopic(t)}>
+      {t.name}
+    </div>
+  ));
   return (
     <div className={styles.navigation}>
-      we have {topics.length} topics in the nav component.
+      <AppBar />
+      {topicNodes}
     </div>
   );
 }
 
+//prop type validation
 Navigation.propTypes = {
   topics: React.PropTypes.arrayOf(
     React.PropTypes.shape({
@@ -24,6 +31,7 @@ Navigation.propTypes = {
       description: React.PropTypes.string.isRequired
     })
   ).isRequired,
+  selectTopic: React.PropTypes.func.isRequired,
 };
 
 export default Navigation;

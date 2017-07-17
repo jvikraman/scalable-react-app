@@ -10,8 +10,19 @@ import Helmet from 'react-helmet';
 import selectNavigationContainer from './selectors';
 import styles from './styles.css';
 import Navigation from '../../components/Navigation';
+import { requestTopics, selectTopic, toggleDrawer } from './actions';
 
 export class NavigationContainer extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  static propTypes = {
+    requestTopics: React.PropTypes.func.isRequired
+  }
+
+  //get topics from the server when the component loads
+  componentWillMount() {
+    this.props.requestTopics();
+  }
+
   render() {
     return (
       <div className={styles.navigationContainer}>
@@ -26,7 +37,9 @@ const mapStateToProps = selectNavigationContainer();
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    requestTopics: () => dispatch(requestTopics()),
+    selectTopic: (topic) => dispatch(selectTopic(topic)),
+    toggleDrawer: () => dispatch(toggleDrawer()),
   };
 }
 
